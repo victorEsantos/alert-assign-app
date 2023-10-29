@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserListAllService } from '../user-list-all.service'; // Importe o serviço
+import { UserListAllService } from '../user-list-all.service';
+import {UserDeleteService} from "../user-delete.service"; // Importe o serviço
 
 @Component({
   selector: 'app-user-list-all',
@@ -38,8 +39,12 @@ export class UserListAllComponent implements OnInit {
     console.log('Editar usuário:', user);
   }
 
-  deleteUser(user: any) {
-    // Lógica para excluir o usuário (implemente conforme necessário)
-    console.log('Excluir usuário:', user);
+  deleteUser(id: any) {
+    this.userDeleteService.deleteUser(id).subscribe(
+      (data: any) => {
+        console.log('Usuário deletado com sucesso:', data);
+        this.loadUsers();
+      }
+    );
   }
 }

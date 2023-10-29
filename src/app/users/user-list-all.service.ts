@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserListAllService {
-  private apiUrl = 'http://localhost:8080/users'; // Certifique-se de que o URL está correto
+  private apiUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +28,4 @@ export class UserListAllService {
     return this.http.put<any>(url, userData);
   }
 
-  deleteUser(userId: number): Observable<any> {
-    const url = `${this.apiUrl}/${userId}`;
-    return this.http.delete<any>(url);
-  }
 }
