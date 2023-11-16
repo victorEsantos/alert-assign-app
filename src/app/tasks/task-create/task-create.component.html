@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <h2>Criar Nova Tarefa</h2>
+  <form [formGroup] = "taskForm" (ngSubmit)="createTask()">
+    <div class="mb-3">
+      <label for="description" class="form-label">Descrição:</label>
+      <input type="text" class="form-control" id="description" formControlName="description">
+    </div>
+    <div class="mb-3">
+      <label for="alertFrequency" class="form-label">Frequência de Alerta:</label>
+      <select id="alertFrequency" class="form-select" formControlName="alertFrequency">
+        <option *ngFor="let frequency of frequencies">{{ frequency }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="rotationFrequency" class="form-label">Frequência de Rotação:</label>
+      <select id="rotationFrequency" class="form-select" formControlName="rotationFrequency">
+        <option *ngFor="let frequency of frequencies">{{ frequency }}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="taskForm.invalid">Criar Tarefa</button>
+  </form>
+</div>

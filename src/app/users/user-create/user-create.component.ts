@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCreateService } from '../user-create.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-create',
@@ -13,7 +14,7 @@ export class UserCreateComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
-  constructor(private fb: FormBuilder, private userService: UserCreateService) { }
+  constructor(private fb: FormBuilder, private userService: UserCreateService, private router: Router) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -29,6 +30,7 @@ export class UserCreateComponent implements OnInit {
         response => {
           console.log('Usuário criado com sucesso:', response);
           // Você pode adicionar lógica adicional aqui, como navegar para outra página ou mostrar uma mensagem de sucesso.
+          this.router.navigate(['/users/list']).then(r => console.log('navigated'));
         },
         error => {
           console.error('Erro ao criar usuário:', error);
