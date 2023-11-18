@@ -27,10 +27,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t your-docker-username/your-angular-app .
+        run: docker build -t vicjll/alert_assign_app .
 
       - name: Push Docker image
-        run: docker push your-docker-username/your-angular-app
+        run: docker push vicjll/alert_assign_app
 
   deploy:
     needs: build
@@ -38,7 +38,7 @@ jobs:
 
     steps:
       - name: Pull img from Docker Hub
-        run: docker pull your-docker-username/your-angular-app:latest
+        run: docker pull vicjll/alert_assign_app:latest
 
       - name: Remove Docker container (if exists)
         run: docker rm -f angular_app_container || true
@@ -47,4 +47,4 @@ jobs:
         run: |
           docker run -d -p 4200:4200 \
             -e NODE_ENV=production \
-            --name angular_app_container your-docker-username/your-angular-app
+            --name angular_app_container vicjll/alert_assign_app
