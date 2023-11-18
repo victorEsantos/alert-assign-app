@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 RUN npm run buildprod
 EXPOSE 4200
-CMD ["npm", "prod", "--", "--host", "0.0.0.0", "--disable-host-check"]
+CMD ["npm", "startPrd", "--", "--host", "0.0.0.0", "--disable-host-check"]
