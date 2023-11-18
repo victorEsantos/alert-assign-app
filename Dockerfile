@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run buildprod
 EXPOSE 4200
-CMD ["npm", "start"]
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--disable-host-check"]
