@@ -40,6 +40,7 @@ jobs:
       - name: Strop all containers by key
         run: docker stop $(docker ps -q)
 
+
       - name: Pull img from Docker Hub
         run: docker pull vicjll/alert_assign_app:latest
 
