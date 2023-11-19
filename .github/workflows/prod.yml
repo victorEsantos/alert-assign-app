@@ -1,51 +1,38 @@
-name: Deploy AngularApp
+name: GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: 18.18.2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build Angular project to production
-        run: npm run buildprod
+      - name: Run tests
+        run: npm run test:headless
 
-      - name: Login DockerHub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build
+        run: npm run build:prod
 
-      - name: Build Docker image
-        run: docker build -t vicjll/alert_assign_app .
-
-      - name: Push Docker image
-        run: docker push vicjll/alert_assign_app
-
-  deploy:
-    needs: build
-    runs-on: self-hosted
-
-    steps:
-
-      - name: Pull img from Docker Hub
-        run: docker pull vicjll/alert_assign_app:latest
-
-      - name: Remove Docker container (if exists)
-        run: docker rm -f angular_app_container || true
-
-      - name: Run Docker container
-        run: |
-          docker run -d -p 4200:4200 \
-            -e NODE_ENV=production \
-            --name angular_app_container vicjll/alert_assign_app
+      - name: Deploy
+        if: success()
+        run: aws s3 sync ./dist/alert-assign-app s3://alertassignapp
