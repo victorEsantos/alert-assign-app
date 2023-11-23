@@ -78,6 +78,9 @@
             },
             "development": {
               "browserTarget": "alert-assign-app:build:development"
+            },
+            "local": {
+              "browserTarget": "alert-assign-app:build:local"
             }
           },
           "defaultConfiguration": "development"
