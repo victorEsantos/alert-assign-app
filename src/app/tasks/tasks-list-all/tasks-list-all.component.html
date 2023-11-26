@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <h2>Lista de Tarefas</h2>
+  <table class="table table-bordered">
+    <caption>Listagem de Tarefas</caption>
+    <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Frequencia alerta</th>
+      <th>Rotação alerta</th>
+      <th>Usuários vinculados</th>
+      <th class="text-center">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasks">
+      <td class="col-4">{{ task.description }}</td>
+      <td class="col-4">{{ task.alertFrequency }}</td>
+      <td class="col-4">{{ task.rotationFrequency }}</td>
+      <td class="col-4">{{ getUsersName(task.users) }}</td>
+      <td class="col-2 text-center">
+<!--        <button class="btn btn-primary btn-sm btn-block" (click)="insertUser(user)">Detalhes</button>-->
+<!--        <button class="btn btn-warning btn-sm btn-block" (click)="editUser(user)">Editar</button>-->
+        <button class="btn btn-danger btn-sm btn-block" (click)="deleteTask(task.id)">Excluir</button>
+        <a class="btn btn-info" [routerLink]="['/tasks', task.id, 'usuarios']">Visualizar Usuários</a>
+
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

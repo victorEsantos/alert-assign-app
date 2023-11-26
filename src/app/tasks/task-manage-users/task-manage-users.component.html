@@ -1,0 +1,41 @@
+<div class="container mt-05">
+
+  <h2>Gerenciar usuários na tarefa</h2>
+
+  <form [formGroup] = "form" (ngSubmit)="insertUser()">
+    <hr>
+    <label>Selecione um usuario para vincular</label>
+    <select class="form-control" formControlName="user">
+      <option value="" selected>Selecione um usuário</option>
+      <option *ngFor="let user of allUsers" value="{{user.id}}">{{ user.name }}</option>
+    </select>
+    <br>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Adicionar usuário</button>
+  </form>
+
+  <h2>Usuários da tarefa</h2>
+<!--percorer com ngfor lista de users e mostrar um abaixo do outro em uma tabela-->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersOnTask">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteUser()">Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+</div>
+
+

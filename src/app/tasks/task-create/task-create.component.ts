@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../service/task.service';
 import { Frequency } from '../model/task.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-task-create',
@@ -16,7 +17,7 @@ export class TaskCreateComponent implements OnInit {
     });
   frequencies = Object.values(Frequency);
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) { }
+  constructor(private fb: FormBuilder, private taskService: TaskService, private router: Router) { }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
@@ -31,8 +32,11 @@ export class TaskCreateComponent implements OnInit {
       const taskData = this.taskForm.value;
       this.taskService.createTask(taskData).subscribe(response => {
         console.log('Tarefa criada com sucesso:', response);
-        this.taskForm.reset(); // Limpa o formulário após a criação da tarefa
-      });
+        this.router.navigate(['/tasks/list']).then(r => console.log('navigated'));
+      },
+        error => {
+          alert('Erro ao criar tarefa');
+        });
     }
   }
 }
