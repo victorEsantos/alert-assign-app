@@ -12,8 +12,8 @@ import {Router} from "@angular/router";
 export class TaskCreateComponent implements OnInit {
   taskForm: FormGroup = this.fb.group({
       description: ['', Validators.required],
-      alertFrequency: [Frequency.DAILY, Validators.required],
-      rotationFrequency: [Frequency.DAILY, Validators.required]
+      alertFrequency: [Validators.required],
+      rotationFrequency: [Validators.required]
     });
   frequencies = Object.values(Frequency);
 
@@ -22,8 +22,8 @@ export class TaskCreateComponent implements OnInit {
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
-      alertFrequency: [Frequency.DAILY, Validators.required],
-      rotationFrequency: [Frequency.DAILY, Validators.required]
+      alertFrequency: [Validators.required],
+      rotationFrequency: [Validators.required]
     });
   }
 

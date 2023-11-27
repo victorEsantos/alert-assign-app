@@ -8,12 +8,14 @@
     <div class="mb-3">
       <label for="alertFrequency" class="form-label">Frequência de Alerta:</label>
       <select id="alertFrequency" class="form-select" formControlName="alertFrequency">
+        <option selected>Selecione uma opção</option>
         <option *ngFor="let frequency of frequencies">{{ frequency }}</option>
       </select>
     </div>
     <div class="mb-3">
       <label for="rotationFrequency" class="form-label">Frequência de Rotação:</label>
       <select id="rotationFrequency" class="form-select" formControlName="rotationFrequency">
+        <option selected>Selecione uma opção</option>
         <option *ngFor="let frequency of frequencies">{{ frequency }}</option>
       </select>
     </div>
