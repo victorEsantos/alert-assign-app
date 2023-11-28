@@ -14,7 +14,7 @@ export class TaskManageUsersComponent implements OnInit {
   taskId: string = "";
 
   form: FormGroup = this.fb.group({
-    user:[Validators.required],
+    user: ['Selecione um usuário', Validators.required],
   })
 
   usersOnTask: any[] = [];
@@ -24,7 +24,8 @@ export class TaskManageUsersComponent implements OnInit {
               private fb: FormBuilder,
               private userService: UserListAllService,
               private taskService: TaskService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
 
@@ -33,7 +34,7 @@ export class TaskManageUsersComponent implements OnInit {
     })
 
     this.form = this.fb.group({
-      user:[Validators.required],
+      user: [Validators.required],
     })
 
     this.refreshUsersList();
@@ -69,6 +70,27 @@ export class TaskManageUsersComponent implements OnInit {
 
   deleteUser() {
     alert('deletar usuario da tarefa será implementado em breve');
+  }
 
+  ativarTarefa() {
+    this.taskService.getById(this.taskId).subscribe(
+      (data: any) => {
+        //lista de usuarios é vazia
+        if (data.users == null || data.users.length == 0) {
+          alert('ERRO!!! \n   Não é possível ativar uma tarefa sem usuários');
+        } else if (data.status == 'ACTIVE') {
+          alert('Tarefa já está ativa');
+          //return and stop metod
+        } else {
+          this.taskService.ativarTarefa(this.taskId).subscribe(response => {
+              console.log('Tarefa ativada com sucesso:', response);
+              alert('Tarefa ativada com sucesso!');
+            },
+            error => {
+              alert('ERRO!!! \n  Erro ao ativar tarefa');
+            });
+        }
+      }
+    );
   }
 }

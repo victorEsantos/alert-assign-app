@@ -39,6 +39,10 @@ export class TaskService {
   getById(id: string) {
     return this.http.get(this.apiUrl + '/' + id);
   }
+
+  ativarTarefa(taskId: string) {
+    return this.http.post<any>(this.apiUrl + '/' + taskId + '/activate', null);
+  }
 }
 
 export class TarefaInserirUsuario{

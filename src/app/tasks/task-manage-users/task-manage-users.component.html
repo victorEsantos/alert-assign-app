@@ -2,20 +2,52 @@
 
   <h2>Gerenciar usuários na tarefa</h2>
 
-  <form [formGroup] = "form" (ngSubmit)="insertUser()">
-    <hr>
-    <label>Selecione um usuario para vincular</label>
-    <select class="form-control" formControlName="user">
-      <option value="" selected>Selecione um usuário</option>
-      <option *ngFor="let user of allUsers" value="{{user.id}}">{{ user.name }}</option>
-    </select>
-    <br>
-    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Adicionar usuário</button>
-  </form>
+  <div class="container">
+    <div class="row justify-content-md-center">
 
-  <h2>Usuários da tarefa</h2>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+
+        <form [formGroup]="form" (ngSubmit)="insertUser()" class="border p-4 text-center mx-auto h-100">
+          <h4>Aqui é possível incluir usuários na tarefa:</h4>
+          <label for="user">Selecione um usuário para vincular</label>
+          <select id="user" class="form-control w-50 mx-auto" formControlName="user">
+            <option value="0">Selecione um usuário</option>
+            <option *ngFor="let user of allUsers" [value]="user.id">{{ user.name }}</option>
+          </select>
+          <br>
+          <button class="btn btn-primary btn-block" type="submit" [disabled]="form.invalid">Adicionar usuário</button>
+        </form>
+
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="border p-4 mx-auto text-center h-100">
+          <h4>Aqui é possível ativar sua tarefa:</h4>
+
+          <figcaption class="text-center">
+            Ao ativar a tarefa os usuarios passam a ser notificados,
+          </figcaption>
+          <figcaption class="text-center">
+            não será possível inativar apenas excluir
+          </figcaption>
+
+          <button class="btn btn-success mt-3 btn-block mx-auto d-block mt-4" (click)="ativarTarefa()" >Ativar Tarefa</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <h2 class="mt-5">Usuários da tarefa</h2>
 <!--percorer com ngfor lista de users e mostrar um abaixo do outro em uma tabela-->
-  <table class="table table-striped">
+  <table class="table table-striped mt-1">
     <thead>
       <tr>
         <th>Nome</th>
@@ -32,6 +64,7 @@
         </td>
       </tr>
     </tbody>
+    <caption>Lista de usuários vinculados a tarefa</caption>
   </table>
 
 

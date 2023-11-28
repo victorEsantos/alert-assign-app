@@ -52,17 +52,4 @@ export class TasksListAllComponent implements OnInit{
     );
   }
 
-  getUsersName(users: any) {
-    let stringNomes = '';
-
-    users.forEach((user: any) => {
-      if(stringNomes != '') {
-        stringNomes += user.name + ', ';
-      } else {
-        stringNomes += user.name;
-      }
-    });
-
-    return stringNomes;
-  }
 }
