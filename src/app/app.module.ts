@@ -8,11 +8,13 @@ import {UsersModule} from "./users/users.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {TasksModule} from "./tasks/tasks.module";
+import { HomecompComponent } from './homecomp/homecomp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    HomecompComponent
   ],
   imports: [
     ReactiveFormsModule,
